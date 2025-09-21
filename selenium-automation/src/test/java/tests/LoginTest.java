@@ -18,8 +18,7 @@ public class LoginTest extends BaseTest {
         String email = ConfigReader.getProperty("admin_email");
         String password = ConfigReader.getProperty("password");
 
-        // Perform login
-        LoginPage login = new LoginPage(driver)
+        new LoginPage(driver)
                 .loginAs(email, password);
 
         // Add wait for redirection
@@ -34,8 +33,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void invalidLoginTest() {
-        // Invalid credentials
-        LoginPage login = new LoginPage(driver)
+        new LoginPage(driver)
                 .loginAs("wronguser@example.com", "wrongpass");
 
         // Add wait for error message
@@ -52,8 +50,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void invalidLoginTest_IncorrectPassword() {
         String email = ConfigReader.getProperty("admin_email");
-        // Invalid credentials
-        LoginPage login = new LoginPage(driver)
+        new LoginPage(driver)
                 .loginAs(email, "wrongpass");
 
         // Add wait for error message
