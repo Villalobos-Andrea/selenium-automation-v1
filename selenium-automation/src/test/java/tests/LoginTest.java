@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void validLoginTest() {
-        String email = ConfigReader.getProperty("email");
+        String email = ConfigReader.getProperty("admin_email");
         String password = ConfigReader.getProperty("password");
 
         // Perform login
@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("dashboard.php"));
 
-        // Assertion: check URL after login
+       
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("dashboard.php"),
                 "Expected to be redirected to dashboard, but was: " + currentUrl);
@@ -44,7 +44,6 @@ public class LoginTest extends BaseTest {
                 ExpectedConditions.visibilityOfElementLocated(By.id("error-msg"))
         );
 
-        // Assertion: check error message text
         String errorMessage = errorElement.getText();
         Assert.assertEquals(errorMessage, "No account found with that email.",
                 "Error message did not match!");
@@ -52,7 +51,7 @@ public class LoginTest extends BaseTest {
     
     @Test
     public void invalidLoginTest_IncorrectPassword() {
-        String email = ConfigReader.getProperty("email");
+        String email = ConfigReader.getProperty("admin_email");
         // Invalid credentials
         LoginPage login = new LoginPage(driver)
                 .loginAs(email, "wrongpass");
@@ -63,7 +62,6 @@ public class LoginTest extends BaseTest {
                 ExpectedConditions.visibilityOfElementLocated(By.id("error-msg"))
         );
 
-        // Assertion: check error message text
         String errorMessage = errorElement.getText();
         Assert.assertEquals(errorMessage, "Invalid password. Please try again.",
                 "Error message did not match!");

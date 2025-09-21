@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
+    private By accessLogin = By.xpath("/html/body/header/nav/ul/li[6]/a");
     private By emailField = By.id("email");
     private By passwordField = By.id("password");
     private By loginButton = By.className("login-btn");
@@ -13,6 +14,11 @@ public class LoginPage extends BasePage {
     // Constructor
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+    
+    public LoginPage navigateLogin() {
+    	click(accessLogin);
+        return this;
     }
 
     // Page Actions
@@ -32,7 +38,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage loginAs(String email, String password) {
-        return enterEmail(email).enterPassword(password).clickLogin();
+        return navigateLogin().enterEmail(email).enterPassword(password).clickLogin();
     }
 
     public String getErrorMessage() {
